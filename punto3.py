@@ -39,6 +39,7 @@ def interrupcion(pulsador): #funcion que llama el evento de interrupcion
 	n = 0
 	print ('interrupcion detectada')
 	print (n)
+	print (contador)
 
 
 try:
@@ -52,9 +53,11 @@ try:
 			GPIO.output(digits[digit], 0)
 			time.sleep(0.001)
 			contador=contador+1
+			print(contador)
 			GPIO.output(digits[digit], 1)
 			
-		if (contador == 60000):	
+		if (contador >= 600):
+			print('Entro al iff del 600')
 			n=n+1
 			contador=0
 		

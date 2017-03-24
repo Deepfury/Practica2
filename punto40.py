@@ -34,7 +34,7 @@ try:
 			for loop in range(0,7):
 				GPIO.output(segments[loop], num[s[digit]][loop])
 			GPIO.output(digits[digit], 0)
-			time.sleep(0.001)
+			time.sleep(0.002)
 			GPIO.output(digits[digit], 1)
 finally:
     GPIO.cleanup()
