@@ -52,24 +52,33 @@ n = str(n).rjust(4)
 
 try:
 	GPIO.add_event_detect(pulsador, GPIO.RISING, callback=interrupcion, bouncetime=200)
+	titilando = 0
+	i=0
 	while True:
 		s = str(n).rjust(4)
 		for digit in range(4):
 			for loop in range(0,7):
 				GPIO.output(segments[loop], num[s[digit]][loop])
 			
-			if(digit==0 and contador<=500):
+			if(digit==titilando and contador<=500):
 				GPIO.output(digits[digit], 1)
 				dspl = digit
 				continue
 			else:
 				if(contador>=2000):
 					contador=0
+						
+			if (i>=8000):
+				titilando = titilando + 1
+				i = 0
+				if (titilando>=4):
+					titilando=0
 			
 			
 			GPIO.output(digits[digit], 0)
 			time.sleep(0.001)
 			contador = contador + 1
+			i = i + 1
 			GPIO.output(digits[digit], 1)
 			
 finally:
